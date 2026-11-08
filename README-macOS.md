@@ -127,5 +127,16 @@ Notes:
   built; distributing it to other Macs needs a proper signing/notarization
   setup.
 
+## Graphics profiles (macOS)
+
+Ready-to-use video profiles for the macOS build (fullscreen/windowed,
+OpenGL shaders, Retina and external displays) are documented in
+[docs/macos-graphics/README.md](docs/macos-graphics/README.md).
+
+```sh
+./scripts/apply-graphics-profile.sh --list
+./scripts/apply-graphics-profile.sh balanced-fullscreen --launch
+```
+
 ## Additional Help
 Should you require any further assistance regarding the macOS build - feel free to ask around on the official forums - https://openxcom.org/forum/ or contact us directly on GitHub - [@rcreasey](http://github.com/rcreasey)

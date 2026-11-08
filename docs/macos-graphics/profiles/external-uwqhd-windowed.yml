@@ -1,0 +1,18 @@
+# name: External UWQHD (windowed)
+# description: 1920x1200 windowed, OpenGL, Openxcom shader — резкий вариант для внешнего 3440x1440
+displayWidth: 1920
+displayHeight: 1200
+fullscreen: false
+borderless: false
+allowResize: false
+useOpenGL: true
+useOpenGLShader: Shaders/Openxcom.OpenGL.shader
+useOpenGLSmoothing: false
+vSyncForOpenGL: true
+keepAspectRatio: true
+geoscapeScale: 0
+battlescapeScale: 0
+useScaleFilter: false
+useHQXFilter: false
+useXBRZFilter: false
+nonSquarePixelRatio: false

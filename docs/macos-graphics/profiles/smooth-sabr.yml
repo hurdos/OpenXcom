@@ -1,0 +1,18 @@
+# name: Smooth (fullscreen, SABR)
+# description: 1280x800 fullscreen, OpenGL, SABR-XCOMified — максимальное сглаживание
+displayWidth: 1280
+displayHeight: 800
+fullscreen: true
+borderless: false
+allowResize: false
+useOpenGL: true
+useOpenGLShader: Shaders/SABR-XCOMified.OpenGL.shader
+useOpenGLSmoothing: false
+vSyncForOpenGL: true
+keepAspectRatio: true
+geoscapeScale: 0
+battlescapeScale: 0
+useScaleFilter: false
+useHQXFilter: false
+useXBRZFilter: false
+nonSquarePixelRatio: false
