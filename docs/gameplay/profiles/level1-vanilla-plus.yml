@@ -1,0 +1,18 @@
+# name: Level 1 — Vanilla+
+# description: Объёмные взрывы + боевые повышения; остальной баланс как в оригинале
+battleExplosionHeight: 3
+fieldPromotions: true
+storageLimitsEnforced: false
+canSellLiveAliens: false
+aggressiveRetaliation: false
+battleUFOExtenderAccuracy: false
+sneakyAI: false
+alienBleeding: false
+weaponSelfDestruction: false
+retainCorpses: false
+allowPsiStrengthImprovement: false
+allowPsionicCapture: false
+battleInstantGrenade: false
+strafe: false
+newSeedOnLoad: false
+craftLaunchAlways: false

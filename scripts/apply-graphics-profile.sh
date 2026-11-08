@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 #
-# Apply one of the macOS graphics profiles from docs/macos-graphics/profiles
-# to the current user's OpenXcom options.cfg.
+# Apply an OpenXcom profile (graphics or gameplay) to the current user's
+# options.cfg. The graphics profiles are the default; --dir selects another
+# profile directory (see scripts/apply-gameplay-profile.sh).
 #
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-PROFILE_DIR="docs/macos-graphics/profiles"
+PROFILE_DIR="${PROFILE_DIR:-docs/macos-graphics/profiles}"
 OPTIONS_FILE="${OPENXCOM_OPTIONS:-$HOME/Library/Application Support/OpenXcom/options.cfg}"
 
 usage() {
@@ -15,6 +16,7 @@ usage() {
 Usage: scripts/apply-graphics-profile.sh [options] PROFILE
 
 Options:
+  --dir DIR       profile directory (default: docs/macos-graphics/profiles)
   --list          list available profiles
   --show PROFILE  print a profile without applying it
   --launch        launch OpenXcom after applying the profile
@@ -45,6 +47,18 @@ LAUNCH=0
 
 while [ $# -gt 0 ]; do
 	case "$1" in
+		--dir)
+			if [ $# -lt 2 ]; then
+				echo "ERROR: --dir requires a directory" >&2
+				exit 2
+			fi
+			PROFILE_DIR="$2"
+			shift 2
+			;;
+		--dir=*)
+			PROFILE_DIR="${1#*=}"
+			shift
+			;;
 		--list)
 			list_profiles
 			exit 0

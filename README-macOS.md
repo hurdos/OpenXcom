@@ -138,5 +138,16 @@ OpenGL shaders, Retina and external displays) are documented in
 ./scripts/apply-graphics-profile.sh balanced-fullscreen --launch
 ```
 
+## Gameplay difficulty profiles (macOS)
+
+Balance-changing options are collected into progression levels from
+"Vanilla+" to hardcore. Quality-of-life and graphics settings are not touched.
+See [docs/gameplay/README.md](docs/gameplay/README.md).
+
+```sh
+./scripts/apply-gameplay-profile.sh --list
+./scripts/apply-gameplay-profile.sh level1-vanilla-plus --launch
+```
+
 ## Additional Help
 Should you require any further assistance regarding the macOS build - feel free to ask around on the official forums - https://openxcom.org/forum/ or contact us directly on GitHub - [@rcreasey](http://github.com/rcreasey)

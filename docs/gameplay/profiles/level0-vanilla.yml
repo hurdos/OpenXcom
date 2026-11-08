@@ -1,0 +1,18 @@
+# name: Level 0 — Vanilla balance
+# description: Все балансные изменения выключены; точка отсчёта для повышения сложности
+battleExplosionHeight: 0
+fieldPromotions: false
+storageLimitsEnforced: false
+canSellLiveAliens: false
+aggressiveRetaliation: false
+battleUFOExtenderAccuracy: false
+sneakyAI: false
+alienBleeding: false
+weaponSelfDestruction: false
+retainCorpses: false
+allowPsiStrengthImprovement: false
+allowPsionicCapture: false
+battleInstantGrenade: false
+strafe: false
+newSeedOnLoad: false
+craftLaunchAlways: false
