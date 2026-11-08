@@ -51,5 +51,81 @@ This project has two ways to build: one with make and the other with Xcode.  The
 1. Build with cmd-B
 1. Your artifact will be named `openxcom.app` in the build target directory (Debug or Release).
 
+## Building with Docker (no local dependencies)
+
+This is the easiest way to get a native Apple Silicon build without installing
+a C++ compiler, CMake, SDL or any other library on the Mac. Docker is used
+only as a Linux-based cross-compilation environment: the resulting application
+runs natively on macOS.
+
+Requirements:
+
+- Docker Desktop (Docker Compose v2);
+- original UFO/TFTD data placed into `bin/UFO` and `bin/TFTD` (the folders are
+  git-ignored; see the README files inside them).
+
+Build:
+
+```sh
+./scripts/build-macos-docker.sh
+open dist/OpenXcom.app
+```
+
+Build, create a DMG/zip and install the app into `Applications` in one go:
+
+```sh
+./scripts/build-macos-docker.sh --package --install --open
+```
+
+The package step produces `dist/OpenXcom-macos-arm64.dmg` (drag `OpenXcom.app`
+to the `Applications` shortcut) and `dist/OpenXcom-macos-arm64.zip`. The install
+step copies the built app to `/Applications/OpenXcom.app`, or to
+`~/Applications/OpenXcom.app` when `/Applications` is not writable. The app can
+also be installed separately from an existing build:
+
+```sh
+./scripts/install-macos-app.sh          # or: ./scripts/install-macos-app.sh --open
+./scripts/package-macos-app.sh          # only DMG + zip
+```
+
+The first run builds the cross toolchain and all dependencies (SDL2,
+sdl12-compat, SDL_image, SDL_mixer, SDL_gfx, yaml-cpp) and can take
+15-30 minutes. Subsequent builds reuse the Docker layer, CMake and ccache
+caches and are much faster.
+
+The result is `dist/OpenXcom.app` — an `arm64` bundle with the SDL libraries
+inside `Contents/Frameworks` and the game data inside `Contents/Resources`.
+The script signs the bundle ad-hoc, which is required for arm64 binaries on
+Apple Silicon.
+
+Useful commands:
+
+```sh
+# reset the build cache and rebuild from scratch
+./scripts/build-macos-docker.sh --clean
+
+# run only the compile step (without the codesign wrapper)
+docker compose run --rm build
+
+# open an interactive shell in the build image
+docker compose run --rm --entrypoint bash build
+```
+
+Notes:
+
+- Only `arm64` is produced by default. A universal build would require a
+  second dependency stack and is not enabled.
+- The build uses the third-party `crazymax/osxcross:26.1` image, which contains
+  the macOS SDK and the osxcross toolchain. It is used locally only; neither
+  the SDK nor a signed/notarized application is redistributed.
+- SDL2 uses `@available`, so the linker needs `libclang_rt.osx.a` from
+  compiler-rt. The wrapper copies it from the installed Xcode / Command Line
+  Tools into `docker/vendor/` automatically (that file is git-ignored). No
+  extra installation is required when Xcode is already present.
+- The application is not signed with a Developer ID and is not notarized.
+  A local ad-hoc signature is enough to run it on the machine where it was
+  built; distributing it to other Macs needs a proper signing/notarization
+  setup.
+
 ## Additional Help
 Should you require any further assistance regarding the macOS build - feel free to ask around on the official forums - https://openxcom.org/forum/ or contact us directly on GitHub - [@rcreasey](http://github.com/rcreasey)

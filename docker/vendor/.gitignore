@@ -1,0 +1,4 @@
+# The wrapper copies libclang_rt.osx.a from the installed Xcode here before
+# building the Docker image. It is a binary from Xcode and must not be
+# committed to the repository.
+*.a

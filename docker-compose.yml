@@ -1,0 +1,24 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: builder
+    image: openxcom-macos-builder:local
+    working_dir: /src
+    environment:
+      SRC: /src
+      BUILD: /build
+      OUT: /out
+      CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE:-Release}
+      JOBS: ${JOBS:-}
+    volumes:
+      - .:/src:ro
+      - ./dist:/out
+      - openxcom-build:/build
+      - openxcom-ccache:/ccache
+    command: ["/usr/local/bin/build-openxcom.sh"]
+
+volumes:
+  openxcom-build:
+  openxcom-ccache:
